@@ -1,0 +1,63 @@
+clear;
+close all;
+clc;
+
+addpath('C:\Users\Phani\Dropbox\DH\RobotModel\Matlab\maincode\data');
+addpath('C:\Users\Phani\Dropbox\DH\RobotModel\Matlab\maincode\path_planner\RRT-connectstart');
+
+global robot;
+global sim;
+global base;
+base = 'leg';
+sim = 1; %0 for OFF and 1 for ON
+robot = make_model();
+
+if base == 'leg'
+    %Names and Ids for leg base
+    r_arm = 16;
+    l_arm = 21;
+    l_leg = 28;
+    from = 1;
+    adj = 12;
+elseif base == 'hip'
+    %Names and Ids for hip base
+    r_arm = 10;
+    l_arm = 15;
+    r_leg = 22;
+    l_leg = 29;
+    from = 5;
+    adj = 12;
+end
+
+
+q = zeros(1,28);
+ForwKin(q);
+
+start = robot.parts(l_arm).joint_loc'
+start(1) = start(1)+50;
+start(2) = start(2);
+start(3) = start(3);
+goal = start;
+goal(2) = goal(2)+70;
+centre = (start + goal)/2;
+r=10;
+
+[traj,q] = rrt_connect(start,goal,l_arm,from,adj);
+
+
+start = robot.parts(l_arm).joint_loc'
+start(1) = start(1);
+start(2) = start(2);
+start(3) = start(3);
+goal = start;
+goal(3) = goal(3)+40;
+
+[traj1,q1] = rrt_connect(start,goal,l_arm,1,adj);
+
+x = [traj(1,:),traj1(1,:)];
+y = [traj(2,:),traj1(2,:)];
+z = [traj(3,:),traj1(3,:)];
+
+%[flag,q,Dq,pos] = InvKin(x,y,z,r_arm,from,adj);
+
+follow_traj(x,y,z,[q,q1],0);

@@ -1,3 +1,20 @@
+%#####################################################################################################
+%# Function : Self collision between the parts                                                       #
+%#                                                                                                   #       
+%# Input(s)  : None                                                                                  #
+%#                                                                                                   #                
+%# Ouptut(s) : returns 1 if there is no collision else 0                                             #
+%#                                                                                                   #       
+%# Example: collision_check()                                            #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
+
+
+
 function [flag] = collision_check()
 global robot;
 flag = 1;

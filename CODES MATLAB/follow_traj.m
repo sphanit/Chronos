@@ -1,4 +1,17 @@
-function [tmp1,tmp2,tmp3] = follow_traj(x,y,z,q,loop)
+%#####################################################################################################
+%# Function : simulation function                                                                                                           #   
+%#                                                                                                                                          #       
+%# Input(s)  : x(x trajectory), y(y trajectory), z(z trajetcory),q( angular trajectory obtained from IK), loop(flag)                        #
+%#                                                                                                                                          #                
+%# Ouptut(s) : takes the inverse kinetics angles and runs the forward kinematcs on it so as to enable the robot reach the req position      #      # 
+%#                                                                                                                                          #       
+%# Example: follow_traj(traj1_matrix, traj2_matrix, traj3_matrix,angtraj_matrix,1)                                                          #      #   
+%#                                                                                                                                          #       
+%#                                                                                                                                          #               
+%#                                                                                                                                          #                                       
+%#####################################################################################################
+
+function [] = follow_traj(x,y,z,q,loop)
 global robot
 global sim
 global base

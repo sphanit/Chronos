@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function :AG_CMM matrix obtained                                                                  #   
+%#                                                                                                   #       
+%# Input(s)  : Tr_mat(Transformation matrix),com(COM of the robot),dq(angular velocity)              #
+%#                                                                                                   #                
+%# Ouptut(s) : AG(CMM matrix),hG(central momentum),h(centroidal momentum of each part),vG()          # 
+%#                                                                                                   #       
+%# Example: Hom_Trans(-90, 10, 5, 90)                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function[h,AG,hG,vG] = M_mats(Tr_mat,com,dq)
 
 global robot;

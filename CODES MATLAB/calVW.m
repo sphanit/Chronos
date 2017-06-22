@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : Calculate link velocity and angular velocity w.r.t global frame                               #   
+%#                                                                                                          #       
+%# Input(s)  : pid(parent id), cid(child id), fr (flag, if =0, then parent to child propogation,vice-versa) #
+%#                                                                                                          #                
+%# Ouptut(s) : v(link velocity), w(link angular velocity)                                                   # 
+%#                                                                                                          #       
+%# Example: calVW(pid,cid,dq,0)                                                                             #   
+%#                                                                                                          #       
+%#                                                                                                          #               
+%#                                                                                                          #                                       
+%#####################################################################################################
+
 function [v,w] = calVW(pid,cid,dq,fr)
 global robot;
 dq(29)=0;

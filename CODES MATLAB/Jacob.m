@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : Jacobian matrix generated                                                              #   
+%#                                                                                                   #       
+%# Input(s)  : u(axis vector matrix), p(positions vector matrix)                                                 #
+%#                                                                                                   #                
+%# Ouptut(s) : Jacobian matrix obtained                                                              # 
+%#                                                                                                   #       
+%# Example: Jacob( u,p)                                                             #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [J] = Jacob(u,p)
 
 l = length(p);

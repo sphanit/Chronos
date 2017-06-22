@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : Walking gait generation                                                                #   
+%#                                                                                                   #       
+%# Input(s)  : None                                                                                  #
+%#                                                                                                   #                
+%# Ouptut(s) : Trajectories of ZMP and angles                                                        # 
+%#                                                                                                   #       
+%# Example: gen_gait()                                                               #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [ZMP,q] = gen_gait()
 global robot;
 global base;

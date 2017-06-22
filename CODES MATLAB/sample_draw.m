@@ -1,3 +1,19 @@
+%#####################################################################################################
+%# Function : generate the stick figures                                                             #   
+%#                                                                                                   #       
+%# Input(s)  : p(position of the axis)                                                               #
+%#                                                                                                   #                
+%# Ouptut(s) : stick figure plot is obtained                                                         # 
+%#                                                                                                   #       
+%# Example: sample_draw(position)                                                                    #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
+
+
 function [] = sample_draw(p)
 %For Drawing in zero theta
 global count

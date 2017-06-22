@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : Calculates the forward kinematics of the robote#                                                          #   
+%#                                                                                                                      #       
+%# Input(s)  : theta, T_mat(transformation matrix on base), dq(angular velocity of each joint)                                                                                #
+%#                                                                                                                      #                
+%# Ouptut(s) :com_final(COM of the robot), cm(COM of each part), P_final(linear momentum of the robot),
+%#            L_final(angular momentum of the robot),P(linear momentum of each part),L(angular momentum of each part)   #                   # 
+%#                                                                                                   #       
+%# Example: ForwKin(theta,T_mat,dq)                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [com_final,cm,P_final,L_final,P,L] = ForwKin(theta,T_mat,dq)
 global robot
 global base

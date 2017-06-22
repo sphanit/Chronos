@@ -1,5 +1,5 @@
 %#####################################################################################################
-%# Function : To generate the trajectectory                                                          #   
+%# Function : To generate the trajectory                                                             #   
 %#                                                                                                   #       
 %# Input(s)  : None                                                                                  #
 %#                                                                                                   #                

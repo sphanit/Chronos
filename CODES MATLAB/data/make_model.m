@@ -1,3 +1,5 @@
+%initialization of various model parts
+
 function [robot] = make_model()
 global base
 if(base == 'lleg' | base == 'rleg')

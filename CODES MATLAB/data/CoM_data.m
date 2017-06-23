@@ -1,3 +1,6 @@
+%generating COM data
+
+
 clc;
 clear all;
 close all;

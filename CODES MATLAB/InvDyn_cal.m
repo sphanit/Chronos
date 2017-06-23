@@ -1,11 +1,11 @@
 %#####################################################################################################
 %# Function : To calculate the inverse dynamics                                                      #   
 %#                                                                                                   #       
-%# Input(s)  : n                                                                                  #
+%# Input(s)  : n(base Id)                                                                            #
 %#                                                                                                   #                
-%# Ouptut(s) : ret i                                                            # 
+%# Ouptut(s) : updated force, torques and unit vectors                                               # 
 %#                                                                                                   #       
-%# Example: InvDyn_cal(5)                                                                                     #   
+%# Example: InvDyn_cal(5)                                                                            #   
 %#                                                                                                   #       
 %#                                                                                                   #               
 %#                                                                                                   #                                       

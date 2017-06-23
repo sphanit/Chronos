@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : To calculate the inverse dynamics                                                      #   
+%#                                                                                                   #       
+%# Input(s)  : n                                                                                  #
+%#                                                                                                   #                
+%# Ouptut(s) : ret i                                                            # 
+%#                                                                                                   #       
+%# Example: InvDyn_cal(5)                                                                                     #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [ ret ] = InvDyn_cal(n)
 global robot;
 
@@ -18,7 +32,7 @@ for i=1:28
     end
 end
 ForwKin_Dyn(1);
-[f,tau] = InvDyn(1);
+[f,tau] = InvDyn(1);  ##################
 ret = [f',tau',robot.parts(1:28).u]';
 
 end

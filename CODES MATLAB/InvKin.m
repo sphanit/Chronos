@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : To calculate the inverse kinematics                                                      #   
+%#                                                                                                   #       
+%# Input(s)  : x,y,z -trajectories, part_Id, from (start link Id), adj(adjust), theta                                                                                #
+%#                                                                                                   #                
+%# Ouptut(s) : pos(position), flag(to tell whether the solution of IK exist or not , 0 implies does not exist and vice-versa                                                              # 
+%#             q(angle matrix),Dq(angula                                                                                      #       
+%# Example: None                                                                                     #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 
 function [flag,q,Dq,pos,cdl,HG] = InvKin(x,y,z,part_Id,from,adj,theta)
 global robot;

@@ -1,3 +1,6 @@
+ %# 3D inverted pendulum based walking implementation#
+
+
 global robot;
 global base;
 global count;

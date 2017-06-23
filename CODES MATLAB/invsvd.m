@@ -1,3 +1,18 @@
+%#####################################################################################################
+%# Function : Calculate inverse of matrix using SVD                                                  #   
+%#                                                                                                   #       
+%# Input(s)  : any matrix                                                                            #
+%#                                                                                                   #                
+%# Ouptut(s) : inverse of the matrix                                                                 # 
+%#                                                                                                   #       
+%# Example: invsvd(matrix)                                                                           #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
+
 function ji = invsvd(j)
 
 [u,d,v] = svd(j);

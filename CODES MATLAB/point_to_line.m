@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : To calculate the  perpendicular distance between the point and the line defined by     #   
+%#             the two vectors v1,v2                                                                 #       
+%# Input(s)  : pt(point),v1 & v2 - the 2 vectors on the line                                         #
+%#                                          _                                                        #                
+%# Ouptut(s) : d(distance between the line and the point)                                            # 
+%#                                                                                                   #       
+%# Example: point_to_line([a1,b1,c1],[x1,y1,z1],[x2,y2,z2])                                          #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function d = point_to_line(pt, v1, v2)
       a = v1 - v2;
       b = pt - v2;

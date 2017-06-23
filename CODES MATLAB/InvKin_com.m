@@ -1,3 +1,18 @@
+%#####################################################################################################
+%# Function : To calculate the inverse kinematics on COM                                              #   
+%#                                                                                                   #       
+%# Input(s)  : x,y,z -COM trajectories, Tr_mat(Transformation matrix),enf(end effectors)             #
+%#               from (start link Id),com(COM of the robot),theta                                    #
+%#                                                                                                   #                
+%# Ouptut(s) :flag(if 0, solution doesnt exist and vice-versa),q(angles matrix),gg(end effector      # 
+%#             axis location),pts(points on the trajectory)                                          #       
+%# Example:                                                                                          #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [flag,q,gg,pts] = InvKin_com(x,y,z,tg,Tr_mat,enf,from,theta,com)
 global robot;
 global base;

@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : Jacobian for calculating IK of COM trajectory                                          #   
+%#                                                                                                   #       
+%# Input(s)  : None #
+%#                                                                                                   #                
+%# Ouptut(s) : Matrix (3 x 28)                                                # 
+%#                                                                                                   #       
+%# Example: Jacob_CoM()                                                              #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [ J_com ] = Jacob_CoM ()
 global robot;
 global base;

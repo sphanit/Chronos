@@ -1,3 +1,18 @@
+%#####################################################################################################
+%# Function : To get the stick figure                                                    #   
+%#                                                                                                   #       
+%# Input(s)  : cm(COM of each part), com(COM of the entire model) #
+%#                                                                                                   #                
+%# Ouptut(s) : stick figure obtained                                                  # 
+%#                                                                                                   #       
+%# Example: s_d(part_com, model_com)                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
+
 function[] = s_d(cm,com)
 %For Drawing in zero theta
 global count

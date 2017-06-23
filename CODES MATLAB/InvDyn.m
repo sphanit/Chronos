@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : To calculate the inverse dynamics                                                      #   
+%#                                                                                                   #       
+%# Input(s)  : n(base Id)                                                                            #
+%#                                                                                                   #                
+%# Ouptut(s) : f(force),t(torque),tt(testing parameter)                                              # 
+%#                                                                                                   #       
+%# Example: InvDyn(1)                                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [f,t,tt] = InvDyn(n)
 
 global robot;

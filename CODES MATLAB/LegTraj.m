@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : To generate the walking trajectory of the humanoid                                                  #   
+%#                                                                                                   #       
+%# Input(s)  :  #
+%#                                                                                                   #                
+%# Ouptut(s) : T (Homogeneous Transformation matrix)                                                 # 
+%#                                                                                                   #       
+%# Example: Hom_Trans(-90, 10, 5, 90)                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [x1,y1,z1]  = LegTraj(l_pos,orie,sLen, sHt, sDisp, itr)
 % arguments are leg pos(1x3), orientaion(3x3), length, height, displacement
 % in y, no i

@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function : Calculates the forward kinematics of the robote#                                                          #   
+%#                                                                                                                      #       
+%# Input(s)  : theta, T_mat(transformation matrix on base), dq(angular velocity of each joint)                                                                                #
+%#                                                                                                                      #                
+%# Ouptut(s) :com_final(COM of the robot), cm(COM of each part), P_final(linear momentum of the robot),
+%#            L_final(angular momentum of the robot),P(linear momentum of each part),L(angular momentum of each part)   #                   # 
+%#                                                                                                   #       
+%# Example: ForwKin(theta,T_mat,dq)                                                                #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [com_final,cm,P_final,L_final,P,L] = ForwKin(theta,T_mat,dq)
 global robot
 global base
@@ -5,7 +19,7 @@ global move_base
 load model_data_new
 load com_data_latest
 %Robot_data
-
+% COM and inertia calculation for each part as per the solidworks frame
 for i=1:25
     com.x(i) = sum(cm_data(i).x.*cm_data(i).mass)/sum(cm_data(i).mass);
     com.y(i) = sum(cm_data(i).y.*cm_data(i).mass)/sum(cm_data(i).mass);
@@ -37,7 +51,7 @@ if(base == 'rleg') %(only this base is changed)
     else
         Tr_mat = eye(4);
     end
-    
+    % Transformation matrices 
     % For 0 - 17
     T(:,:,1) = Hom_Trans(alp1(1),l0,0,th1(1)); %T_w_0
     T(:,:,2) = Tr_mat*Hom_Trans(alp1(2),l1,0,th1(2)); %T_0_1
@@ -76,6 +90,9 @@ if(base == 'rleg') %(only this base is changed)
     T2(:,:,5) = Hom_Trans(alp3(5),l2,0,th3(5)); %T_1_2
     T2(:,:,6) = Hom_Trans(alp3(6),l1,0,th3(6)); %T_0_1
     T2(:,:,7) = Hom_Trans(alp3(7),l0,0,th3(7)); %T_w_0
+    
+    %Chain rule of Transformation matrices
+    
     for i=1:15
         if(i==1)
             T_m(:,:,i) = T(:,:,i+1);
@@ -136,7 +153,7 @@ if(base == 'rleg') %(only this base is changed)
     
     T_lg = T2_m(:,:,8);
     
-    % %Calculating Positions
+    % %Calculating Positions 
     pts(:,1) = Tr_mat*[0;0;0;1];
     b_t(:,1) = [0;0;0;1];
     br_t(:,1) = [0;0;0;1];
@@ -168,6 +185,7 @@ if(base == 'rleg') %(only this base is changed)
     u = [u, u1(:,2:6), u2(:,2:8)];
     
     draw_pts = [draw_pts, pts1(:,2:6), pts2(:,2:8)];
+    %adjusting positions to correct joint locations 
     draw_pts(:,6) = T_m(:,:,4)*[0;0;l4;1];
     draw_pts(:,8) = T_m(:,:,6)*[0;0;d5;1];
     draw_pts(:,10) = T_m(:,:,8)*[0;0;l8;1];
@@ -176,37 +194,43 @@ if(base == 'rleg') %(only this base is changed)
     draw_pts(:,18) = T1_m(:,:,2)*[0;0;(l13);1];
     
     for i=1:28
-        robot.parts(i).axis_loc = p(1:3,i);
-        robot.parts(i).joint_loc = draw_pts(1:3,i+1);
-        robot.parts(i).Z_w = u(1:3,i);
-        robot.parts(i).R_mat = R_t(:,:,i);
-        robot.parts(i).Xs = [R_loc(:,:,i)'                   zeros(3,3);
-                             R_loc(:,:,i)'*hat(b_t(1:3,i))'  R_loc(:,:,i)'];
-        robot.parts(i).b = b_t(1:3,i);
-        robot.parts(i).br = br_t(1:3,i);
-        robot.parts(i).a = a_t(1:3,i);
-        robot.parts(i).ar = ar_t(1:3,i);
+        robot.parts(i).axis_loc = p(1:3,i);                                      %dh axis location in global frame
+        robot.parts(i).joint_loc = draw_pts(1:3,i+1);                            %actual joint locations in global frame
+        robot.parts(i).Z_w = u(1:3,i);                                           %rotation vector in global frame
+        robot.parts(i).R_mat = R_t(:,:,i);                                       %rotation matrix w.r.t to global frame
+        robot.parts(i).Xs = [R_loc(:,:,i)'                   zeros(3,3);         %transformation matrix for L & P        
+                             R_loc(:,:,i)'*hat(b_t(1:3,i))'  R_loc(:,:,i)'];     
+        robot.parts(i).b = b_t(1:3,i);                                           %position vector of child frame w.r.t parent frame 
+        robot.parts(i).br = br_t(1:3,i);                                         %position vector of parent frame w.r.t child frame
+        robot.parts(i).a = a_t(1:3,i);                                           %rotation vector of child frame w.r.t. parent frame
+        robot.parts(i).ar = ar_t(1:3,i);                                         %rotation vector of parent frame w.r.t child frame
     end
     
     
-    T = [0 0 -1 0;0 1 0 0; 1 0 0 l0;0 0 0 1];
-    T=eye(4);
-    for i=1:29
+    T = [0 0 -1 0;0 1 0 0; 1 0 0 l0;0 0 0 1];                                   %Transformation matrix for plotting
+                                                                                 
+    for i=1:29                                                                   
         draw_pts(:,i) = T*draw_pts(:,i);
     end
     robot.draw = draw_pts(1:3,:);
     
-    idx = 1:25;
+    %dynamics data
+    
+    idx = 1:25;                                                                 %motor indices (not as per poppy)
+    
+    
+    %rotating the solid work data into DH data
     
     cm.mass = com.mass(idx);
     cm.I(:,:,:) = com.I(:,:,idx);
     
-    x = com.x(idx);
+    x = com.x(idx);                
     y = com.y(idx);
     z = com.z(idx);
     
     It = cm.mass(1)*([x(1);y(1);z(1)]'*[x(1);y(1);z(1)] - [x(1);y(1);z(1)]*[x(1);y(1);z(1)]'); % Translation to local frame
     I_loc(:,:,1) = It + cm.I(:,:,1);
+    
     
     for j=1:25
         if (j==1 || j==8 || j==11)
@@ -308,13 +332,17 @@ if(base == 'rleg') %(only this base is changed)
         end
     end
     
+    %COM calculation
+    
     tmp = Tr_mat*[pt(1,1);pt(2,1);pt(3,1);1];
     
     cm.x(1) = tmp(1);
     cm.y(1) = tmp(2);
     cm.z(1) = tmp(3);
-
+    
+    %velocity and angular velocity calculation
     [v,w] = standing_vel(dq);
+    
     c1 = v(:,1)+ cross(w(:,1),robot.parts(1).R_mat*[pt(1,1);pt(2,1);pt(3,1)]);
     P(:,1) = cm.mass(1)*c1;                                                                 %Linear momentum calculation
     
@@ -322,6 +350,8 @@ if(base == 'rleg') %(only this base is changed)
     
     j = 2;
     it=2;
+    
+    %COM, Linear , Angular Momentum calculation
     
     for i=1:14
         if(j==5)
@@ -406,12 +436,12 @@ if(base == 'rleg') %(only this base is changed)
     end
     
     
-    com_final.x = sum(cm.x.*cm.mass)/sum(cm.mass);
-    com_final.y = sum(cm.y.*cm.mass)/sum(cm.mass);
+    com_final.x = sum(cm.x.*cm.mass)/sum(cm.mass);             %COM calculation for the model
+    com_final.y = sum(cm.y.*cm.mass)/sum(cm.mass);              
     com_final.z = sum(cm.z.*cm.mass)/sum(cm.mass);
-    com_final.mass = sum(cm.mass);
-    P_final = sum(P,2);
-    L_final = sum(L,2);
+    com_final.mass = sum(cm.mass);                             %total mass of the robot
+    P_final = sum(P,2);                                        %Linear momentum calculation for the robot
+    L_final = sum(L,2);                                        %Angular momentum calculation for the robot
     
     cm.x(26)=0;cm.y(26)=0;cm.z(26)=0;
     I_loc(:,:,26) = eye(3);
@@ -424,15 +454,15 @@ if(base == 'rleg') %(only this base is changed)
     j=1;
     
     for i = 1:28
-        robot.parts(i).mass = cm.mass(j);
-        robot.parts(i).I = I_loc(:,:,j);
-        robot.parts(i).Is = Is(cm.mass(j),[pt(1,j),pt(2,j),pt(3,j)],I_loc(:,:,j));
-        robot.parts(i).com_g =[cm.x(j),cm.y(j),cm.z(j)];
-        robot.parts(i).com_l =[pt(1,j),pt(2,j),pt(3,j)];
-        robot.parts(i).P = P(:,j);
-        robot.parts(i).L = L(:,j);
+        robot.parts(i).mass = cm.mass(j);                                             %mass
+        robot.parts(i).I = I_loc(:,:,j);                                              %inertia
+        robot.parts(i).Is = Is(cm.mass(j),[pt(1,j),pt(2,j),pt(3,j)],I_loc(:,:,j));    %spatial inertia matrix
+        robot.parts(i).com_g =[cm.x(j),cm.y(j),cm.z(j)];                              %global COM
+        robot.parts(i).com_l =[pt(1,j),pt(2,j),pt(3,j)];                              %local COM
+        robot.parts(i).P = P(:,j);                                                    %linear momentum
+        robot.parts(i).L = L(:,j);                                                    %Angular momentum
         robot.parts(i).Xpg = [robot.parts(i).R_mat'                                                                         zeros(3,3);
-                              robot.parts(i).R_mat'*hat(robot.parts(i).joint_loc - [com_final.x;com_final.y;com_final.z])'  robot.parts(i).R_mat'];
+                              robot.parts(i).R_mat'*hat(robot.parts(i).joint_loc - [com_final.x;com_final.y;com_final.z])'  robot.parts(i).R_mat'];        %Transformation matrix for CMM calculation
         if(i==16 || i==21 || i==28)
             robot.parts(i).mass = 0;
             robot.parts(i).I = zeros(3,3);

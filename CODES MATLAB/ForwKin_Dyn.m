@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function  : updates kinematics for the calculation of dynamics                                    #   
+%#                                                                                                   #       
+%# Input(s)  : n(part_Id,1)                                                                          #
+%#                                                                                                   #                
+%# Ouptut(s) : updates the model                                                                     # 
+%#                                                                                                   #       
+%# Example: ForwKin_Dyn(1)                                                                           #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [] = ForwKin_Dyn(n)
 global robot
 

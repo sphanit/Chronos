@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function  : Generating leg and hip trajectories                                                   #   
+%#                                                                                                   #       
+%# Input(s)  : number of forward steps that has to be taken (n)                                      #
+%#                                                                                                   #                
+%# Ouptut(s) :x,z(leg trajectories),x_h,z_h(hip and COM trajectory)                                  # 
+%#                                                                                                   #       
+%# Example:new_traj(n)                                                                               #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [x,z,x_h,z_h] = new_traj(n)
 x = [];
 z = [];

@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : To calculate the inverse kinematics on any link                                        #   
+%#                                                                                                   #       
+%# Input(s)  : x,y,z -trajectories,parts,from (start link Id),adj(adjustment needed to getproper     #
+%#             theta values)                                                                         #                
+%# Ouptut(s) : flag(0 if solution doesnt exist and vice-versa),q(anles matrix)                                                              # 
+%#                                                                                                   #       
+%# Example: InvKin_mult2(x,y,z,parts,1,0.01)                                                                                     #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [flag,q] = InvKin_mult2(x,y,z,parts,from,adj)
 global robot;
 global base;

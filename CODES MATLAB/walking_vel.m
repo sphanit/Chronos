@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : To calculate the velocities during walking                                             #   
+%#                                                                                                   #       
+%# Input(s)  :dq(angular velocities)                                                                 #
+%#                                                                                                   #                
+%# Ouptut(s) : v(linear velocities),w(angular velocities)                                            # 
+%#                                                                                                   #       
+%# Example:                                                                                          #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [v,w] = walking_vel(dq)
 global robot;
 global base;
@@ -7,7 +20,18 @@ v = zeros(3,29);
 w = zeros(3,29);
 
 if (base == 'hips')
-    if(change == 1)
+    if(ch%#####################################################################################################
+%# Function : To calculate the inverse kinematics                                                      #   
+%#                                                                                                   #       
+%# Input(s)  : x,y,z -trajectories, part_Id, from (start link Id), adj(adjust), theta                                                                                #
+%#                                                                                                   #                
+%# Ouptut(s) : pos(position), flag(to tell whether the solution of IK exist or not , 0 implies does not exist and vice-versa                                                              # 
+%#             q(angle matrix),Dq(angula                                                                                      #       
+%# Example: None                                                                                     #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################ange == 1)
         for i = 28:-1:23
             [v(:,i),w(:,i)] = calVW(i,robot.parts(i).C_Id,dq,1);
         end

@@ -1,3 +1,17 @@
+%#####################################################################################################
+%# Function :To check and obtain the inverse kinematics solution to reach one link from some other   #   
+%#            link                                                                                   #       
+%# Input(s)  :x1,y1,z1,x2,y2,z2 - trajectories;part_Id1;part_Id2;from(starting link Id),adj(adjacent)#
+%#            dq(angular velocities),theta                                                           #                
+%# Ouptut(s) : flag(if 0, then the solution doesntexist and vice-versa),q(angles matrix),            # 
+%#             Dq(angular velocities),pos(position)                                                  #       
+%# Example: InvKin_mult(x1,y1,z1,4,x2,y2,z2,5,1,2,adj,theta,dq)                                      #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
+
 function [flag,q,Dq,pos] = InvKin_mult(x1,y1,z1,part_Id1,x2,y2,z2,part_Id2,from,from2,adj,theta,dq)
 global robot;
 global base;

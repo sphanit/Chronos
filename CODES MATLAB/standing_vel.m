@@ -1,3 +1,16 @@
+%#####################################################################################################
+%# Function : To calculate the velocities during standinga and walking                               #   
+%#                                                                                                   #       
+%# Input(s)  : dq(angular velocities)                                                                #
+%#                                                                                                   #                
+%# Ouptut(s) : v(linear velocities), w(angular velocities)                                           # 
+%#                                                                                                   #       
+%# Example: None                                                                                     #   
+%#                                                                                                   #       
+%#                                                                                                   #               
+%#                                                                                                   #                                       
+%#####################################################################################################
+
 function [v,w] = standing_vel(dq)
 global robot;
 global base;

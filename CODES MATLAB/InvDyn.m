@@ -1,11 +1,11 @@
 %#####################################################################################################
 %# Function : To calculate the inverse dynamics                                                      #   
 %#                                                                                                   #       
-%# Input(s)  : n                                                                                     #
+%# Input(s)  : n(base Id)                                                                            #
 %#                                                                                                   #                
-%# Ouptut(s) : updates the global model                                                              # 
+%# Ouptut(s) : f(force),t(torque),tt(testing parameter)                                              # 
 %#                                                                                                   #       
-%# Example: None                                                                                     #   
+%# Example: InvDyn(1)                                                                                #   
 %#                                                                                                   #       
 %#                                                                                                   #               
 %#                                                                                                   #                                       
